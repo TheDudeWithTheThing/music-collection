@@ -1,2 +1,2 @@
-# music-manager
+# music-collection
 Take home exercise
