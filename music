@@ -1,0 +1,24 @@
+#!/Users/employee/.rbenv/shims/ruby
+
+require_relative 'music_manager'
+require_relative 'music_input'
+
+music_input = MusicInput.new(MusicManager.new)
+
+puts
+puts 'Welcome to your music collection!'
+puts
+
+input = ''
+
+while input != 'quit'
+  print '> '
+  input = STDIN.gets.chomp
+
+  music_input.process_input(input) unless input == 'quit'
+
+  puts
+end
+
+puts 'Bye!'
+puts
