@@ -34,11 +34,11 @@ class MusicInput
   end
 
   def pretty_puts(records)
-    return if records.nil?
+    return 'No Results' if records.nil? || records.empty?
 
-    records.each do |record|
-      puts "\"#{record[:album]}\" by #{record[:artist]} (#{played_unplayed(record[:played])})"
-    end
+    records.map do |record|
+      "\"#{record[:album]}\" by #{record[:artist]} (#{played_unplayed(record[:played])})"
+    end.join("\n")
   end
 
   def played_unplayed(played)
@@ -47,39 +47,33 @@ class MusicInput
 
   def process_add(input)
     matches = input.scan(/"([^"]+)"\s+"([^"]+)"/).first
-    if matches.nil?
-      print_help
-      return
-    end
+    return print_help if matches.nil?
 
     album = matches[0]
     artist = matches[1]
 
     if @manager.add(artist, album)
-      puts "Added \"#{album}\" by #{artist}"
+      "Added \"#{album}\" by #{artist}"
     else
-      puts 'Nothing Added: Album may already exist.'
+      'Nothing Added: Album already exists'
     end
   end
 
   def process_play(input)
     matches = input.scan(/"([^"]+)"/).first
-    if matches.nil?
-      print_help
-      return
-    end
+    return print_help if matches.nil?
 
     album = matches[0]
 
     if @manager.play(album)
-      puts "You're listening to \"#{album}\""
+      "You're listening to \"#{album}\""
     else
-      puts "Album #{album} does not exist"
+      "Album #{album} does not exist"
     end
   end
 
   def print_help
-    puts <<~HELP
+    <<~HELP
       Valid commands are:
         add "album" "artist"
         play "album"
