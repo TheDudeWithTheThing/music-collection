@@ -38,9 +38,8 @@ jobs:
             mkdir /tmp/test-results
 
             rspec --format progress \
-                  --format RspecJunitFormatter \
                   --out /tmp/test-results/rspec.xml \
-                  --format progress \
+                  --format d \
                   *_spec.rb
 
       # collect reports
