@@ -1,4 +1,4 @@
-#!/Users/employee/.rbenv/shims/ruby
+#!/usr/bin/env ruby -w
 
 require_relative 'music_manager'
 require_relative 'music_input'
@@ -15,7 +15,7 @@ while input != 'quit'
   print '> '
   input = STDIN.gets.chomp
 
-  music_input.process_input(input) unless input == 'quit'
+  puts music_input.process_input(input) unless input == 'quit'
 
   puts
 end

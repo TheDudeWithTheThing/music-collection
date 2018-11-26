@@ -60,6 +60,8 @@ class MusicManager
   end
 
   def filter_unplayed(album_ids)
+    return if album_ids.nil?
+
     album_ids.select { |album_id| @unplayed.include?(album_id) }
   end
 
