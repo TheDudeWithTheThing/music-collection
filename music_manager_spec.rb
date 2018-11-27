@@ -74,6 +74,7 @@ RSpec.describe MusicManager do
     context 'Artist has 1 album in collection' do
       it 'returns serialized data' do
         result = subject.select_by_artist(artist, false)
+
         expect(result).to eq([{ artist: artist, album: album, played: false }])
       end
     end
@@ -81,6 +82,7 @@ RSpec.describe MusicManager do
     context 'Artist is not in collection' do
       it 'returns empty array' do
         result = subject.select_by_artist('Radiohead', false)
+
         expect(result).to eq([])
       end
     end
@@ -98,7 +100,9 @@ RSpec.describe MusicManager do
           subject.play('Van Halen III')
 
           result = subject.select_by_artist(artist, true)
-          expect(result).to eq([{ artist: artist, album: album, played: false }, { artist: artist, album: 'Van Halen', played: false }])
+
+          expect(result).to eq([{ artist: artist, album: album, played: false },
+                                { artist: artist, album: 'Van Halen', played: false }])
         end
       end
     end
@@ -108,6 +112,7 @@ RSpec.describe MusicManager do
     context 'only 1 artist and 1 album in collection' do
       it 'returns serialized data' do
         result = subject.select_all(true)
+
         expect(result).to eq([{ artist: artist, album: album, played: false }])
       end
 
@@ -115,6 +120,7 @@ RSpec.describe MusicManager do
         it 'returns empty array' do
           subject.play(album)
           result = subject.select_all(true)
+
           expect(result).to eq([])
         end
       end

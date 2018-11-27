@@ -2,7 +2,7 @@
 
 ## Music Manager class
 
-The thinking here is that this is set up for very read heavy actions which is why I index everything, sticking to O(1) access across the board. Played and Unplayed are sets since we aren't keeping track of anything about the number of plays, just the state. This layer is meant to be pretty simple returning bools for "What you wanted to happen happened or did not happen.". 
+`MusicManager` is set up for very read heavy actions which is why I index everything, sticking to O(1) access across the board. Played and Unplayed are sets since we aren't keeping track of anything about the number of plays, just the state. This layer is meant to be pretty simple returning bools for "What you wanted to happen happened or did not happen.". 
 
 
 ## Music Input class

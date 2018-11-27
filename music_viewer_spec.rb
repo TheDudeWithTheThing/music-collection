@@ -29,6 +29,7 @@ RSpec.describe MusicViewer do
 
       it 'returns correctly formatted string' do
         output = %("1984" by Van Halen (played)\n"Van Halen" by Van Halen (unplayed))
+
         expect(subject.display(records, hide_played_status)).to eq(output)
       end
     end
@@ -44,6 +45,7 @@ RSpec.describe MusicViewer do
 
       it 'returns correctly formatted string' do
         output = %("1984" by Van Halen\n"Van Halen" by Van Halen)
+
         expect(subject.display(records, hide_played_status)).to eq(output)
       end
     end
