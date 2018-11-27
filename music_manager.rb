@@ -22,18 +22,11 @@ class MusicManager
   def add(artist, album)
     return false if @albums_index.key?(album)
 
-    @artists << artist unless @artists.include?(artist)
-    artist_index = @artists.index(artist)
-    @artists_index[artist] = artist_index
+    artist_index = add_artist(artist)
 
-    @albums << album
-    album_index = @albums.index(album)
-    @albums_index[album] = album_index
+    album_index = add_album(album)
 
-    @artist_albums[artist_index] ||= []
-    @artist_albums[artist_index] << album_index
-
-    @album_artist[album_index] = artist_index
+    join_artist_and_album(artist_index, album_index)
 
     @unplayed.add(album_index)
 
@@ -84,5 +77,29 @@ class MusicManager
         played: @played.include?(album_id)
       }
     end
+  end
+
+  private
+
+  def add_artist(artist)
+    @artists << artist unless @artists.include?(artist)
+    artist_index = @artists.index(artist)
+    @artists_index[artist] = artist_index
+
+    artist_index
+  end
+
+  def add_album(album)
+    @albums << album
+    album_index = @albums.index(album)
+    @albums_index[album] = album_index
+
+    album_index
+  end
+
+  def join_artist_and_album(artist_index, album_index)
+    @artist_albums[artist_index] ||= []
+    @artist_albums[artist_index] << album_index
+    @album_artist[album_index] = artist_index
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'music_manager'
+require_relative 'music_viewer'
 
 class MusicInput
   def initialize(manager)
@@ -20,31 +21,6 @@ class MusicInput
     end
   end
 
-  def process_show(input)
-    unplayed = input.include?('unplayed')
-    by_artist = input.scan(/by\s+"([^"]+)"/).first&.first
-
-    results = if by_artist
-                @manager.select_by_artist(by_artist, unplayed)
-              else
-                @manager.select_all(unplayed)
-              end
-
-    pretty_puts(results)
-  end
-
-  def pretty_puts(records)
-    return 'No Results' if records.nil? || records.empty?
-
-    records.map do |record|
-      "\"#{record[:album]}\" by #{record[:artist]} (#{played_unplayed(record[:played])})"
-    end.join("\n")
-  end
-
-  def played_unplayed(played)
-    played ? 'played' : 'unplayed'
-  end
-
   def process_add(input)
     matches = input.scan(/"([^"]+)"\s+"([^"]+)"/).first
     return print_help if matches.nil?
@@ -57,6 +33,19 @@ class MusicInput
     else
       'Nothing Added: Album already exists'
     end
+  end
+
+  def process_show(input)
+    unplayed = input.include?('unplayed')
+    by_artist = input.scan(/by\s+"([^"]+)"/).first&.first
+
+    results = if by_artist
+                @manager.select_by_artist(by_artist, unplayed)
+              else
+                @manager.select_all(unplayed)
+              end
+
+    MusicViewer.display(results, unplayed)
   end
 
   def process_play(input)

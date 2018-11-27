@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './music_manager'
+require_relative 'music_manager'
 
 RSpec.describe MusicManager do
   let(:artist) { 'Van Halen' }
