@@ -29,7 +29,7 @@ class MusicInput
     artist = matches[1]
 
     if @manager.add(artist, album)
-      "Added \"#{album}\" by #{artist}"
+      %(Added "#{album}" by #{artist})
     else
       'Nothing Added: Album already exists'
     end
@@ -55,7 +55,7 @@ class MusicInput
     album = matches[0]
 
     if @manager.play(album)
-      "You're listening to \"#{album}\""
+      %(You're listening to "#{album}")
     else
       "Album #{album} does not exist"
     end
