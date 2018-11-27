@@ -151,32 +151,4 @@ RSpec.describe MusicInput do
       end
     end
   end
-
-  describe '.pretty_puts' do
-    context 'records is nil' do
-      it 'returns "No Results"' do
-        expect(subject.pretty_puts(nil)).to eq('No Results')
-      end
-    end
-
-    context 'records is empty' do
-      it 'returns "No Results"' do
-        expect(subject.pretty_puts([])).to eq('No Results')
-      end
-    end
-
-    context 'records has multiple' do
-      let(:records) do
-        [
-          { artist: 'Van Halen', album: '1984', played: true },
-          { artist: 'Van Halen', album: 'Van Halen', played: false }
-        ]
-      end
-
-      it 'returns correctly formatted string' do
-        output = %{"1984" by Van Halen (played)\n"Van Halen" by Van Halen (unplayed)}
-        expect(subject.pretty_puts(records)).to eq(output)
-      end
-    end
-  end
 end
